@@ -1,6 +1,12 @@
 # OpenCode .NET Host
 
-A small .NET 10 console app that hosts a coding agent instead of leaving it in a terminal. It starts a private OpenCode server, creates a session that can only read and search, runs one repository review, and writes an event log.
+A small .NET 10 console app that hosts a coding agent instead of leaving it in a terminal. It starts a private OpenCode server, creates a session that can only read files and list them by pattern, runs one repository review, and writes an event log.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![.NET 10](https://img.shields.io/badge/.NET-10-512BD4)](https://dotnet.microsoft.com/)
+[![Stars](https://img.shields.io/github/stars/mikhailpetrusheuski/opencode-dotnet-host?style=social)](https://github.com/mikhailpetrusheuski/opencode-dotnet-host/stargazers)
+
+Read the write-up: [OpenCode's .NET SDK Hit 1.0 - Your C# App Can Now Own the Agent](https://medium.com/@mikhail.petrusheuski/opencodes-net-sdk-hit-1-0-your-c-app-can-now-own-the-agent-d07207b6995d).
 
 It uses [OpenCodeDotNet.Sdk](https://www.nuget.org/packages/OpenCodeDotNet.Sdk), an unofficial community SDK that is not affiliated with or endorsed by the OpenCode team.
 
