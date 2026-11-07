@@ -6,8 +6,7 @@ var repository = args.Length > 0 ? args[0] : Directory.GetCurrentDirectory();
 using var timeout = new CancellationTokenSource(TimeSpan.FromMinutes(10));
 
 await using var server = await OpenCodeServer.StartAsync(
-    new OpenCodeServerOptions { WorkingDirectory = repository },
-    timeout.Token);
+    cancellationToken: timeout.Token);
 using var client = server.CreateClient();
 
 var created = await client.Sessions.CreateSessionAsync(
@@ -21,9 +20,11 @@ var created = await client.Sessions.CreateSessionAsync(
             new() { Action = "*", Resource = "*", Effect = PermissionEffect.Deny },
             new() { Action = "read", Resource = "*", Effect = PermissionEffect.Allow },
             new() { Action = "glob", Resource = "*", Effect = PermissionEffect.Allow },
-            new() { Action = "grep", Resource = "*", Effect = PermissionEffect.Allow },
+            // grep stays denied: its rule checks the search pattern, not the file path.
             new() { Action = "read", Resource = "*.env", Effect = PermissionEffect.Deny },
             new() { Action = "read", Resource = "*.env.*", Effect = PermissionEffect.Deny },
+            new() { Action = "read", Resource = "*.pem", Effect = PermissionEffect.Deny },
+            new() { Action = "read", Resource = "*.key", Effect = PermissionEffect.Deny },
         },
     },
     cancellationToken: timeout.Token);
